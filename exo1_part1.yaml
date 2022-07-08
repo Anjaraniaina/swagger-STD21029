@@ -29,7 +29,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateStudent'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateStudent'
         '400':
           description: Bad request
     post:
@@ -43,7 +45,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Student'
+              type: array
+              items:
+                $ref: '#/components/schemas/Student'
         required: true
       responses:  
         '200':
@@ -51,7 +55,9 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/CreateStudent'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CreateStudent'
         '400':
             description: Bad request
 components:
