@@ -77,17 +77,12 @@ paths:
         - Student
       summary: Update a student
       operationId: UpdateStudent
-      description: |
-        Update the student with
-        * name 
-        * address
-        * phoneNumbers
+      description: Update the student with the provided id
       parameters:
         - name: id
           in: query
           schema:
             type: integer
-          required: true  
       requestBody:
         description: Informations to update for the student's id
         content:
@@ -96,33 +91,6 @@ paths:
               type: array
               items:
                 $ref: '#/components/schemas/Student'
-            examples:
-              changeName:
-                summary: Change name
-                description: How to change name and 
-                value:
-                  id: 1
-                  name: "New name"
-              changeAddress:
-                summary: change address
-                value:
-                  id: 1
-                  address: "Ivandry"
-              changeNameandAddress:
-                summary: change name and address
-                value:
-                  id: 1
-                  name: "Rakoto"
-                  address: "Ivandry" 
-              changePhoneNumber:
-                summary: Add phone number
-                value:
-                  id: 1
-                  phoneNumbers:
-                    - country_code: "+261"
-                      number: "0329877656"
-                    - country_code: "+261"
-                      number: "0329607656"
         required: true
       responses:  
         '200':
@@ -158,7 +126,6 @@ paths:
           in: query
           schema:
             type: integer
-          required: true  
       requestBody:
         description: Informations to update
         content:
@@ -176,7 +143,7 @@ paths:
                 schema:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Student'
+                    $ref: '#/components/schemas/UpdateStudent'
         '400':
             description: Bad request
             content:
@@ -320,7 +287,6 @@ paths:
           in: query
           schema: 
             type: integer
-          required: true  
       requestBody:
         content:
           application/json:
@@ -365,7 +331,6 @@ paths:
           in: query
           schema: 
             type: integer
-          required: true  
       requestBody:
         description: Course to update
         content:
@@ -383,7 +348,7 @@ paths:
                 schema:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Student'
+                    $ref: '#/components/schemas/UpdateCourse'
         '400':
             description: Bad request
             content:
@@ -451,14 +416,6 @@ components:
         name:
           type: string
           example: Doe
-        address:
-          type: string
-          example: "Ivandry"
-        phoneNumbers:
-          type: array
-          items:
-            $ref: '#/components/schemas/phoneNumbers'
-      
       xml:
         name: CreateStudent
     Student:
@@ -467,24 +424,19 @@ components:
         name:
           type: string
           example: Doe
-        address:
-          type: string
-          example: "Ivandry"
-        phoneNumbers:
-          type: array
-          items:
-            $ref: '#/components/schemas/phoneNumbers'
       xml:
         name: Student
-    phoneNumbers:
+    UpdateStudent:
       type: object
       properties:
-        country_code: 
+        name:
           type: string
-          example: "+261"
-        number: 
-          type: string
-          example: "0328765478"
+          example: Doe
+        id:
+          type: integer
+          example: 2
+      xml:
+        name: Student
     CreateCourse:
       type: object
       properties:
@@ -515,6 +467,21 @@ components:
         CreatedDate:
           type: string
           example: '2022-03-29'
+    UpdateCourse:
+      type: object
+      properties:
+        code:
+          type: string
+          example: PROG1
+        name: 
+          type: string
+          example: Algorithmique
+        Teacher:
+          type: string
+          example: Tokimahery RAMAROZAKA
+        id:
+          type: integer
+          example: 1
     RessourceDeleted:
       type: object
       properties:
